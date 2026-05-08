@@ -40,13 +40,14 @@ public record LoginResponseDTO(
      * <p>Expõe apenas os campos seguros — o campo {@code password} da entidade
      * {@link User} é deliberadamente omitido em qualquer mapeamento.</p>
      *
-     * @param id        identificador único do usuário
-     * @param name      nome completo do usuário
-     * @param email     endereço de e-mail
-     * @param role      papel do usuário no sistema (ex: {@code ADMIN}, {@code USER})
-     * @param apiKey    chave de API gerada para o usuário
-     * @param isActive  indica se a conta está ativa
-     * @param createdAt data e hora de criação da conta
+     * @param id                 identificador único do usuário
+     * @param name               nome completo do usuário
+     * @param email              endereço de e-mail
+     * @param role               papel do usuário no sistema (ex: {@code ADMIN}, {@code USER})
+     * @param apiKey             chave de API gerada para o usuário
+     * @param isActive           indica se a conta está ativa
+     * @param mustChangePassword indica se o usuário deve alterar a senha no próximo login
+     * @param createdAt          data e hora de criação da conta
      */
     public record UserDTO(
             UUID id,
@@ -55,6 +56,7 @@ public record LoginResponseDTO(
             String role,
             String apiKey,
             boolean isActive,
+            boolean mustChangePassword,
             LocalDateTime createdAt
     ) {
         /**
@@ -75,6 +77,7 @@ public record LoginResponseDTO(
                     user.getRole().name(),
                     user.getApiKey(),
                     user.isActive(),
+                    user.isMustChangePassword(),
                     user.getCreatedAt()
             );
         }

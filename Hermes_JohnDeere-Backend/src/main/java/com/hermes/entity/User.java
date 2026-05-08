@@ -103,6 +103,19 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private boolean isActive = true;
 
+    /**
+     * Indica se o usuário deve alterar a senha na próxima autenticação.
+     * Definido como true quando:
+     * - Usuário é criado pela primeira vez
+     * - Senha é resetada por um administrador
+     *
+     * Deve ser alterado para false após o usuário criar uma nova senha.
+     * Valor padrão: {@code true} para novos usuários.
+     */
+    @Builder.Default
+    @Column(name = "must_change_password", nullable = false)
+    private boolean mustChangePassword = true;
+
     // ─── Auditoria ────────────────────────────────────────────────────────────
 
     /**
