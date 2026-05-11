@@ -117,7 +117,7 @@ public class UserService {
         user.setEmail(dto.email());
         user.setPassword(passwordEncoder.encode(rawPassword));
         user.setRole(dto.role() != null ? dto.role() : UserRole.USER);
-        user.setActive(dto.isActive() != null ? dto.isActive() : true);
+        user.setIsActive(dto.isActive() != null ? dto.isActive() : true);
 
         User saved = userRepository.save(user);
         log.info("Usuário criado: id={}, email={}", saved.getId(), saved.getEmail());
@@ -148,7 +148,7 @@ public class UserService {
         user.setName(dto.name());
         user.setRole(dto.role());
         if (dto.isActive() != null) {
-            user.setActive(dto.isActive());
+            user.setIsActive(dto.isActive());
         }
 
         User saved = userRepository.save(user);
